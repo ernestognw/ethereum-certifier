@@ -7,10 +7,10 @@ import drizzleOptions from "./drizzle-options";
 import { DrizzleProvider } from "drizzle-react";
 
 ReactDOM.render(
-  <DrizzleProvider options={drizzleOptions}>
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
+    <DrizzleProvider options={drizzleOptions}>
       <App />
-    </ThemeProvider>
-  </DrizzleProvider>,
+    </DrizzleProvider>
+  </ThemeProvider>,
   document.getElementById("root")
 );
