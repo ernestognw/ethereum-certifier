@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "drizzle": "^1.4.0",
     "drizzle-react": "^1.2.0",
+    "drizzle-react-components": "^1.4.0",
+    "openzeppelin-solidity": "^2.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.8.6",
     "react-md-icon": "^1.13.0",
