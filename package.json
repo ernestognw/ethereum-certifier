@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
+    "react": "^16.6.3",
     "react-dom": "^16.8.6",
-    "react-md-icons": "^0.1.10",
-    "react-router-dom": "^5.0.0",
+    "react-md-icon": "^1.13.0",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
     "styled-components": "^4.2.0"
   },
