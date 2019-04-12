@@ -2,6 +2,15 @@
   "name": "ethereum-certifier",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
+    "start:client": "react-scripts start",
+    "start:server": "DEBUG=ethereum-certifier* nodemon server/index.js --exec babel-node",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "seed": "NODE_PATH=src/ babel-node src/drizzle/seed.js"
+  },
   "dependencies": {
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
@@ -10,6 +19,7 @@
     "drizzle": "^1.4.0",
     "drizzle-react": "^1.2.0",
     "drizzle-react-components": "^1.4.0",
+    "nodemon": "^1.18.11",
     "openzeppelin-solidity": "^2.2.0",
     "react": "^16.6.3",
     "react-dom": "^16.8.6",
@@ -18,13 +28,6 @@
     "react-toastify": "^5.0.1",
     "styled-components": "^4.2.0",
     "web3": "^1.0.0-beta.52"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "seed": "NODE_PATH=src/ babel-node src/drizzle/seed.js"
   },
   "eslintConfig": {
     "extends": "react-app"
