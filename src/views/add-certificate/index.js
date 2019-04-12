@@ -27,7 +27,7 @@ class AddCertificate extends Component {
 		try {
 			const { name, imageUrl, course, addressTo } = this.state;
 
-			await drizzle.contracts.Certifications.methods.createCertificate.cacheSend(
+			const result = await drizzle.contracts.Certifications.methods.createCertificate.cacheSend(
 				name,
 				imageUrl,
 				course,
@@ -40,7 +40,9 @@ class AddCertificate extends Component {
 				imageUrl: '',
 				course: '',
 				addressTo: ''
-			});
+      });
+      
+      console.log(result)
 
 			toast.success('Certified registered correctly');
 		} catch (err) {
