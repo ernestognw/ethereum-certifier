@@ -9,7 +9,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "seed": "NODE_PATH=src/ babel-node src/drizzle/seed.js"
+    "seed": "NODE_PATH=src/ babel-node src/drizzle/seed.js",
+    "contract:compile": "cd src/drizzle && truffle compile",
+		"contract:migrate": "cd src/drizzle && truffle migrate --reset"
   },
   "dependencies": {
     "@babel/core": "^7.4.3",
@@ -28,6 +30,7 @@
     "react-scripts": "2.1.8",
     "react-toastify": "^5.0.1",
     "styled-components": "^4.2.0",
+		"truffle-hdwallet-provider": "^1.0.6",
     "web3": "^1.0.0-beta.52"
   },
   "eslintConfig": {
