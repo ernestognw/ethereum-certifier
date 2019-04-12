@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Button = styled.button`
     border-radius: 5px;
@@ -11,7 +11,7 @@ const Button = styled.button`
     justify-content: center;
     font-size: 12px;
     width: max-content;
-    text-transform: ${props => (props.textNormal ? 'initial' : 'uppercase')};
+    text-transform: ${props => (props.textNormal ? "initial" : "uppercase")};
     letter-spacing: 1px;
     font-family: ${props => props.theme.font.medium};
 
@@ -22,9 +22,9 @@ const Button = styled.button`
 
     ${props => {
       switch (props.size) {
-        case 'small':
+        case "small":
           return `padding: .25rem .5rem`;
-        case 'large':
+        case "large":
           return `padding: .875rem 1rem`;
         default:
           return `padding: .625rem 1.25rem`;
@@ -68,50 +68,50 @@ const Button = styled.button`
 
     ${props => {
       switch (props.variant) {
-        case 'outlined':
+        case "outlined":
           return `border: 1px solid ${
-            props.theme.color[props.color || 'default']
+            props.theme.color[props.color || "default"]
           };
-                    color: ${props.theme.color[props.color || 'default']};
+                    color: ${props.theme.color[props.color || "default"]};
                     background-color: transparent;
                     &:hover {
                       background: ${
-                        props.theme.color[props.color || 'default']
+                        props.theme.color[props.color || "default"]
                       };
                       color: #fff;
                       transition: 0.2s all;
                     }`;
-        case 'soft':
-          return `background: ${props.theme.color[props.color || 'default']}64;
+        case "soft":
+          return `background: ${props.theme.color[props.color || "default"]}64;
                     color: ${
-                      props.theme.colors.color[props.color || 'default']
+                      props.theme.colors.color[props.color || "default"]
                     }64;
                     &:hover {
                       box-shadow: 0 2px 1px -1px ${
-                        props.theme.color[props.color || 'default']
+                        props.theme.color[props.color || "default"]
                       }33,
                                   0 1px 1px 0 ${
-                                    props.theme.color[props.color || 'default']
+                                    props.theme.color[props.color || "default"]
                                   }26,
                                   0 1px 3px 0 ${
-                                    props.theme.color[props.color || 'default']
+                                    props.theme.color[props.color || "default"]
                                   }1A;
                     }`;
-        case 'link':
+        case "link":
           return `background: transparent
                     padding: 0;`;
         default:
-          return `background: ${props.theme.color[props.color || 'default']};
+          return `background: ${props.theme.color[props.color || "default"]};
                     color: #fff;
                     &:hover {
                       box-shadow: 0 2px 1px -1px ${
-                        props.theme.color[props.color || 'default']
+                        props.theme.color[props.color || "default"]
                       }33,
                                   0 1px 1px 0 ${
-                                    props.theme.color[props.color || 'default']
+                                    props.theme.color[props.color || "default"]
                                   }26,
                                   0 1px 3px 0 ${
-                                    props.theme.color[props.color || 'default']
+                                    props.theme.color[props.color || "default"]
                                   }1A;
                     }`;
       }

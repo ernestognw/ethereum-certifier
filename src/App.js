@@ -1,28 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import Layout from "components/layout/index";
 import AddCertificate from "./views/add-certificate";
-import { DrizzleContext } from "drizzle-react";
 import Loader from "components/common/loader/index";
+import withDrizzle from "components/providers/withDrizzle";
 
 class App extends Component {
   render() {
+    const {
+      context: { initialized }
+    } = this.props;
     return (
-      <DrizzleContext.Consumer>
-        {drizzleContext => {
-          const { initialized } = drizzleContext;
-          if (!initialized) {
-            return <Loader />;
-          }
-
-          return (
-            <Layout>
-              <AddCertificate />;
-            </Layout>
-          );
-        }}
-      </DrizzleContext.Consumer>
+      <Fragment>
+        <Layout>{!initialized ? <Loader /> : <AddCertificate />}</Layout>
+      </Fragment>
     );
   }
 }
 
-export default App;
+export default withDrizzle(App);

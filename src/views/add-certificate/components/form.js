@@ -1,63 +1,116 @@
 import React, { Component } from "react";
-import { newContextComponents } from "drizzle-react-components";
-import Typography from "components/common/typography";
+import Input from "components/common/input";
+import { Card, CardFooter, CardBody, CardHeader } from "components/common/card";
+import withDrizzle from "components/providers/withDrizzle";
+import Button from "components/common/button/index";
 import Container from "./elements";
 
-const { AccountData, ContractData, ContractForm } = newContextComponents;
-
 class Form extends Component {
-  state = { dataKey: null };
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      imageUrl: "",
+      course: "",
+      addressTo: ""
+    };
+  }
 
   componentDidMount = async () => {
-    try {
-      const { drizzle } = this.props;
-      const contract = drizzle.contracts.Certifications;
+    const {
+      context: { drizzle }
+    } = this.props;
 
-      // get and save the key for the variable we are interested in
-      console.log(contract.methods);
-      const dataKey = await contract.methods["certificates(uint256)"](0).call();
-      console.log(dataKey);
-      this.setState({ dataKey });
-    } catch (err) {
-      console.log(err);
+    console.log(drizzle.contracts.Certifications.methods);
+
+    const data = await drizzle.contracts.Certifications.methods
+      .certificates(0)
+      .call();
+    console.log(data);
+  };
+
+  createCertificate = event => {
+    event.preventDefault();
+    const {
+      context: { drizzle }
+    } = this.props;
+    const { name, imageUrl, course, addressTo } = this.state;
+
+    const state = drizzle.store.getState();
+
+    const stackId = drizzle.contracts.Certifications.methods.createCertificate.cacheSend(
+      name,
+      imageUrl,
+      course,
+      addressTo,
+      { gas: 200000, gasPrice: "8000000000" }
+    );
+
+    if (state.transactionStack[stackId]) {
+      const txHash = state.transactionStack[stackId];
+
+      return state.transactions[txHash].status;
     }
   };
 
+  handleInput = event => {
+    const { target } = event;
+    this.setState({
+      [target.name]: target.value
+    });
+  };
+
   render() {
-    const { drizzle, drizzleState } = this.props;
+    const { name, imageUrl, course, addressTo } = this.state;
     return (
       <Container>
-        <Typography variant="headingTitle">Account Data</Typography>
-        <AccountData
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-          accountIndex={0}
-          units="ether"
-          precision={3}
-        />
-        <Typography marginT="30" variant="headingTitle">
-          Certification 0
-        </Typography>
-        <ContractData
-          contract="Certifications"
-          method="certificates"
-          methodArgs={[0]}
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-        />
-        <Typography marginT="30" variant="headingTitle">
-          Create Certificate
-        </Typography>
-        <ContractForm
-          contract="Certifications"
-          method="createCertificate"
-          labels={["name", "image url", "course", "address"]}
-          drizzle={drizzle}
-          drizzleState={drizzleState}
-        />
+        <Card>
+          <form onSubmit={this.createCertificate}>
+            <CardHeader title="Create Certificate" />
+            <CardBody>
+              <Input
+                onChange={this.handleInput}
+                value={name}
+                name="name"
+                type="text"
+                label="Nombre completo del Egresado"
+                required
+              />
+              <Input
+                onChange={this.handleInput}
+                value={imageUrl}
+                name="imageUrl"
+                type="text"
+                label="Link a su fotografía"
+                required
+              />
+              <Input
+                onChange={this.handleInput}
+                value={course}
+                name="course"
+                type="text"
+                label="Curso"
+                required
+              />
+              <Input
+                onChange={this.handleInput}
+                value={addressTo}
+                name="addressTo"
+                type="text"
+                label="Address del egresado"
+                required
+              />
+            </CardBody>
+            <CardFooter align="right">
+              <Button size="large" color="primary">
+                Click
+              </Button>
+            </CardFooter>
+          </form>
+        </Card>
       </Container>
     );
   }
 }
 
-export default Form;
+export default withDrizzle(Form);
