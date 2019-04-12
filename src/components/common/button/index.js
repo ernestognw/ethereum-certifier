@@ -4,7 +4,6 @@ const Button = styled.button`
 	border-radius: 5px;
 	cursor: pointer;
 	font-weight: 600;
-	/* margin: 0.25rem; */
 	border: none;
 	display: flex;
 	align-items: center;
@@ -14,7 +13,6 @@ const Button = styled.button`
 	text-transform: ${props => (props.textNormal ? 'initial' : 'uppercase')};
 	letter-spacing: 1px;
 	font-family: ${props => props.theme.font.medium};
-
 	&:focus {
 		outline: none;
 	}
@@ -29,7 +27,6 @@ const Button = styled.button`
 				return `padding: .625rem 1.25rem`;
 		}
 	}};
-
 	${props =>
 		props.marginT &&
 		`
@@ -50,9 +47,10 @@ const Button = styled.button`
 			props.disabled &&
 			`
       cursor: initial;
-    `} ${props =>
-			props.fullWidth &&
-			`
+    `};
+	${props =>
+		props.fullWidth &&
+		`
         width: 100%;
     `};
 	${props => {
@@ -87,19 +85,12 @@ const Button = styled.button`
                     }`;
 		}
 	}};
-
 	${props =>
 		props.disabled &&
 		`
         color: ${props.theme.grey.dark};
         background: ${props.theme.grey.veryLightGrey};
     `};
-
-	${props =>
-		props.alignSelf &&
-		`
-      align-self: ${props.alignSelf};
-  `};
 `;
 
 export default Button;

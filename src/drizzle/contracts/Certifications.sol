@@ -5,10 +5,13 @@ import 'openzeppelin-solidity/contracts/token/ERC721/ERC721.sol';
 contract Certifications is ERC721 {
   // Variables
   struct Certificate {
+    uint certificateId;
     string fullName;
     string imageUrl;
     string course;
+    address certificateOwner;
   }
+
   address owner;
   Certificate[] public certificates;
   
@@ -18,14 +21,18 @@ contract Certifications is ERC721 {
   }
   
   // Methods
-  
   // Create Certificate
   function createCertificate(string memory _name, string memory _imageUrl, string memory _course, address _to) public returns (bool){
     uint certificateId = certificates.length;
-    certificates.push(Certificate(_name, _imageUrl, _course));
+    certificates.push(Certificate(certificates.length, _name, _imageUrl, _course, _to));
     
     _mint(_to, certificateId);
     
     return true;
+  }
+
+  // Get certificates quantity
+  function getCertificatesLength() view public returns(uint256){
+    return certificates.length;
   }
 }

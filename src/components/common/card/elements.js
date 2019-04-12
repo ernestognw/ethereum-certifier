@@ -77,6 +77,19 @@ const CardFooter = styled.div`
   background-color: #fff;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  display: flex;
+
+  ${props =>
+    props.align === "center" &&
+    `
+    justify-content: center;
+  `}
+
+  ${props =>
+    props.align === "right" &&
+    `
+    justify-content: flex-end;
+  `}
 `;
 
 export {

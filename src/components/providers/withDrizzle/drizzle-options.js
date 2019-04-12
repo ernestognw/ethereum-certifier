@@ -1,4 +1,4 @@
-import Certifications from './drizzle/build/contracts/Certifications.json';
+import Certifications from 'drizzle/build/contracts/Certifications.json';
 
 const options = {
 	contracts: [Certifications],

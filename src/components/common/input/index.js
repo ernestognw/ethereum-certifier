@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Container, PseudoInput, Label, Message } from "./elements";
+import {
+  Container,
+  PseudoInput,
+  Label,
+  Message,
+  LeftIconContainer
+} from "./elements";
 
 class Input extends Component {
   render() {
@@ -7,6 +13,11 @@ class Input extends Component {
     return (
       <Container marginT={props.marginT} marginB={props.marginB}>
         {props.label && <Label font="light">{props.label}</Label>}
+        {props.leftIcon && (
+          <LeftIconContainer message={props.message}>
+            {props.leftIcon}
+          </LeftIconContainer>
+        )}
         <PseudoInput
           id={props.id}
           type={props.type}
@@ -17,6 +28,7 @@ class Input extends Component {
           warning={props.warning}
           error={props.error}
           name={props.name}
+          leftIcon={props.leftIcon}
           placeholder={props.placeholder}
         />
         {props.message && (

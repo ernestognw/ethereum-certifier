@@ -9,10 +9,10 @@ const Navbar = ({ hideBg, hideNavbar, changeSlide, slide }) => (
 		</LogoContainer>
 		<OptionsContainer>
 			<Option onClick={() => changeSlide(1)} active={slide === 1}>
-				Create a Certificate
+				Create Certificate
 			</Option>
 			<Option onClick={() => changeSlide(2)} active={slide === 2}>
-				Search a Certificate
+				Browser Certificates
 			</Option>
 		</OptionsContainer>
 	</Container>

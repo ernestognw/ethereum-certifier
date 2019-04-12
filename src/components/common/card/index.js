@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Card,
   CardHeaderContainer,
@@ -6,7 +6,7 @@ import {
   CardFooter,
   HeaderTitle,
   HeaderSubtitle
-} from './elements';
+} from "./elements";
 
 const CardHeader = ({ title, subtitle }) => (
   <CardHeaderContainer>
@@ -15,11 +15,4 @@ const CardHeader = ({ title, subtitle }) => (
   </CardHeaderContainer>
 );
 
-export {
-  Card,
-  CardHeaderContainer,
-  CardFooter,
-  CardBody,
-  HeaderTitle,
-  CardHeader
-};
+export { Card, CardFooter, CardBody, CardHeader };

@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes } from "styled-components";
 
 const ldsRing = keyframes`
   0% {
@@ -12,18 +12,19 @@ const ldsRing = keyframes`
 const LoaderContainer = styled.div`
   display: inline-block;
   position: relative;
-  width: ${props => props.size ? `${props.size}px` : '35px' };
-  height: ${props => props.size ? `${props.size}px` : '35px' };
+  width: ${props => (props.size ? `${props.size}px` : "35px")};
+  height: ${props => (props.size ? `${props.size}px` : "35px")};
   & div {
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: ${props => props.size ? `${props.size}px` : '35px' };
-    height: ${props => props.size ? `${props.size}px` : '35px' };
+    width: ${props => (props.size ? `${props.size}px` : "35px")};
+    height: ${props => (props.size ? `${props.size}px` : "35px")};
     border: 2px solid ${props => props.theme.color.secondary};
     border-radius: 50%;
     animation: ${ldsRing} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: ${props => props.theme.color.secondary} transparent transparent transparent;
+    border-color: ${props => props.theme.color.secondary} transparent
+      transparent transparent;
   }
   & div:nth-child(1) {
     animation-delay: -0.45s;
@@ -36,4 +37,11 @@ const LoaderContainer = styled.div`
   }
 `;
 
-export default LoaderContainer;
+const Container = styled.div`
+  display: flex;
+  padding: 5rem;
+  justify-content: center;
+  align-items: center;
+`;
+
+export { LoaderContainer, Container };

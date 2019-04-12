@@ -1,13 +1,15 @@
-import React from 'react';
-import LoaderContainer from './elements';
+import React from "react";
+import { LoaderContainer, Container } from "./elements";
 
 const Loader = ({ size }) => (
-  <LoaderContainer className="lds-ring" size={size}>
-    <div />
-    <div />
-    <div />
-    <div />
-  </LoaderContainer>
+  <Container>
+    <LoaderContainer className="lds-ring" size={size}>
+      <div />
+      <div />
+      <div />
+      <div />
+    </LoaderContainer>
+  </Container>
 );
 
 export default Loader;
