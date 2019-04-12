@@ -21,8 +21,6 @@ class Form extends Component {
       context: { drizzle }
     } = this.props;
 
-    console.log(drizzle.contracts.Certifications.methods);
-
     const data = await drizzle.contracts.Certifications.methods
       .certificates(0)
       .call();
@@ -73,7 +71,7 @@ class Form extends Component {
                 value={name}
                 name="name"
                 type="text"
-                label="Nombre completo del Egresado"
+                label="Nombre completo del egresado"
                 required
               />
               <Input

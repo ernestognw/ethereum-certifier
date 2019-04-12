@@ -4,7 +4,7 @@ import Navbar from "./components/navbar";
 
 const Layout = ({ children }) => (
   <LayoutContent>
-    <Navbar hideBg />
+    <Navbar />
     {children}
   </LayoutContent>
 );
