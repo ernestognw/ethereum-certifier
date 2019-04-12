@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { toast } from "react-toastify";
-import { Card, CardBody as Body, CardHeader } from "components/common/card";
-import Typography from "components/common/typography";
+import { Card } from "components/common/card";
+import Loader from "components/common/loader/index";
 import Input from "components/common/input";
 import withDrizzle from "components/providers/withDrizzle";
 import RoundSearch from "react-md-icon/dist/RoundSearch";
 import { CardBody, Button, OptionsContainer, Option } from "./elements";
+import Certificate from "./components/certificate/index";
 
 class BrowseCertificates extends Component {
   constructor(props) {
@@ -14,19 +15,23 @@ class BrowseCertificates extends Component {
       searchInput: "",
       results: [],
       certificatesLength: "",
-      tab: 1
+      tab: 1,
+      searchResults: [],
+      loading: true
     };
   }
 
   handleInput = event => {
     const { target } = event;
-    const { certificatesLength } = this.state;
-    if (target.value === 0) {
-      target.value = 1;
-    }
-    if (target.value <= certificatesLength && target.value >= 1) {
+    const { value } = target;
+    if (value.match(/[0-9]/g) && !value.includes(" ")) {
       this.setState({
-        searchInput: target.value
+        searchInput: value
+      });
+    } else if (!value) {
+      this.setState({
+        searchInput: "",
+        searchResults: []
       });
     }
   };
@@ -53,7 +58,8 @@ class BrowseCertificates extends Component {
 
       this.setState({
         certificatesLength: length,
-        results
+        results,
+        loading: false
       });
     } catch (err) {
       console.log(err);
@@ -63,26 +69,41 @@ class BrowseCertificates extends Component {
 
   searchCertificate = async event => {
     event.preventDefault();
-    const { searchInput } = this.state;
+    const { searchInput, certificatesLength } = this.state;
     const {
       context: { drizzle }
     } = this.props;
 
-    try {
-      const data = await drizzle.contracts.Certifications.methods
-        .certificates(searchInput - 1)
-        .call();
+    if (searchInput) {
+      if (Number(searchInput) <= certificatesLength) {
+        try {
+          this.setState({ loading: true });
+          const data = await drizzle.contracts.Certifications.methods
+            .certificates(searchInput - 1)
+            .call();
 
-      this.setState({
-        results: [data]
-      });
-    } catch (err) {
-      toast.error("An error has occurred");
+          this.setState({
+            searchResults: [data],
+            loading: false
+          });
+        } catch (err) {
+          toast.error("An error has occurred");
+        }
+      } else {
+        toast.warning("That certificate ID does not exist");
+      }
     }
   };
 
   render() {
-    const { searchInput, results, certificatesLength, tab } = this.state;
+    const {
+      searchInput,
+      results,
+      certificatesLength,
+      tab,
+      searchResults,
+      loading
+    } = this.state;
     return (
       <Fragment>
         <Card>
@@ -92,7 +113,7 @@ class BrowseCertificates extends Component {
                 leftIcon={<RoundSearch />}
                 onChange={this.handleInput}
                 value={searchInput}
-                type="number"
+                type="text"
                 marginT="0"
                 placeholder={`Search certificates by ID (${certificatesLength})`}
               />
@@ -103,22 +124,19 @@ class BrowseCertificates extends Component {
             <Option active={tab === 1}>All</Option>
           </OptionsContainer>
         </Card>
-        {results.length > 0 &&
-          results.map((certificate, id) => (
-            <Card marginT="50" key={id}>
-              <CardHeader title={certificate.fullName} />
-              <Body>
-                <Typography variant="heading">Photo</Typography>
-                <Typography marginB="20">{certificate.imageUrl}</Typography>
-                <Typography variant="heading">Course</Typography>
-                <Typography marginB="20">{certificate.course}</Typography>
-                <Typography variant="heading">Address</Typography>
-                <Typography marginB="20">
-                  {certificate.certificateOwner}
-                </Typography>
-              </Body>
-            </Card>
-          ))}
+        {loading ? (
+          <Loader />
+        ) : (
+          <Fragment>
+            {searchResults.length > 0
+              ? searchResults.map((certificate, id) => (
+                  <Certificate certificate={certificate} key={id} />
+                ))
+              : results.map((certificate, id) => (
+                  <Certificate certificate={certificate} key={id} />
+                ))}
+          </Fragment>
+        )}
       </Fragment>
     );
   }
