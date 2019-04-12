@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { ToastContainer, Slide } from "react-toastify";
 import Layout from "components/layout/index";
 import AddCertificate from "./views/add-certificate";
-import SearchCertificate from "./views/search-certificate";
+import BrowseCertificate from "./views/browse-certificate";
 import Loader from "components/common/loader/index";
 import withDrizzle from "components/providers/withDrizzle";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -25,10 +25,10 @@ class App extends Component {
 
     if (slide === 1) {
       title = "Create a certificate";
-      subtitle = "Here you can fill the form to create new certifications";
+      subtitle = "Fill the form to create new certifications";
     } else if (slide === 2) {
-      title = "Search a certificate";
-      subtitle = "Here you can find a certificate by the address";
+      title = "Browse certificates";
+      subtitle = "Explore Blockchain Academy Professionals";
     }
 
     this.setState({ title, subtitle });
@@ -52,7 +52,7 @@ class App extends Component {
         ) : (
           <Fragment>
             {slide === 1 && <AddCertificate />}
-            {slide === 2 && <SearchCertificate />}
+            {slide === 2 && <BrowseCertificate />}
           </Fragment>
         )}
         <ToastContainer

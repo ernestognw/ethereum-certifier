@@ -1,0 +1,26 @@
+[
+  {
+    "fullName": "Ernesto García",
+    "imageUrl": "https://scontent-qro1-1.xx.fbcdn.net/v/t1.0-9/42959076_2367948656766000_5372811788725256192_n.jpg?_nc_cat=104&_nc_ht=scontent-qro1-1.xx&oh=5e5f8b7341a8b394d83722313be763f8&oe=5D321378",
+    "course": "Ethereum Intermedio",
+    "ownerAddress": "0xe341e4ac5b01a76d4b1708bfdb4cad9040c99572"
+  },
+  {
+    "fullName": "Arath Jiménez",
+    "imageUrl": "https://scontent-qro1-1.xx.fbcdn.net/v/t1.0-9/57111743_3028411800533123_453736464161701888_o.jpg?_nc_cat=108&_nc_ht=scontent-qro1-1.xx&oh=82a38074330088ef5319afa69c22cabd&oe=5D4F3C0E",
+    "course": "Ethereum Avanzado",
+    "ownerAddress": "0x81719267d554765c93e575df8e458567d04478c7"
+  },
+  {
+    "fullName": "Marco Muñoz",
+    "imageUrl": "https://scontent-qro1-1.xx.fbcdn.net/v/t1.0-9/53918361_10161522334350182_324083448878727168_n.jpg?_nc_cat=109&_nc_ht=scontent-qro1-1.xx&oh=05c1a97abdf1e24add0070ade7691b54&oe=5D4EC459",
+    "course": "RSK",
+    "ownerAddress": "0xa7f522cf1961d32624f330e7274bf2c96e3f6000"
+  },
+  {
+    "fullName": "Anthony Chávez",
+    "imageUrl": "https://scontent-qro1-1.xx.fbcdn.net/v/t1.0-9/32423106_10204316333464305_6576904229481349120_o.jpg?_nc_cat=103&_nc_ht=scontent-qro1-1.xx&oh=c2afaedf2c155ee0ca313c0d05d1112d&oe=5D32947D",
+    "course": "Hyperledger For Business",
+    "ownerAddress": "0x4bf61f9c7a769540bc2eae702fa83f6e341b5a4e"
+  }
+]

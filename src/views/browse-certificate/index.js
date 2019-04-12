@@ -5,9 +5,9 @@ import Typography from "components/common/typography";
 import Input from "components/common/input";
 import withDrizzle from "components/providers/withDrizzle";
 import RoundSearch from "react-md-icon/dist/RoundSearch";
-import { CardBody, Button } from "./elements";
+import { CardBody, Button, OptionsContainer, Option } from "./elements";
 
-class SearchCertificate extends Component {
+class BrowseCertificates extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -83,6 +83,9 @@ class SearchCertificate extends Component {
               <Button>Search</Button>
             </CardBody>
           </form>
+          <OptionsContainer>
+            <Option>All</Option>
+          </OptionsContainer>
         </Card>
         {results.length > 0 &&
           results.map((certificate, id) => (
@@ -98,4 +101,4 @@ class SearchCertificate extends Component {
   }
 }
 
-export default withDrizzle(SearchCertificate);
+export default withDrizzle(BrowseCertificates);
