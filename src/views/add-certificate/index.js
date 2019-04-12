@@ -7,8 +7,8 @@ class AddCertificate extends Component {
     return (
       <Fragment>
         <Header
-          primary="Add certificate"
-          secondary="Here you can fill the form to create new certifications"
+          primary="Añade un certificado para egresados"
+          secondary="Utiliza este formulario para crear un certificado en la Blockchain"
         />
         <Form />
       </Fragment>

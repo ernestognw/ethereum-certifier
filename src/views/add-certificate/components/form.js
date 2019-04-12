@@ -64,7 +64,7 @@ class Form extends Component {
       <Container>
         <Card>
           <form onSubmit={this.createCertificate}>
-            <CardHeader title="Create Certificate" />
+            <CardHeader title="Añade un certificado" />
             <CardBody>
               <Input
                 onChange={this.handleInput}
@@ -101,7 +101,7 @@ class Form extends Component {
             </CardBody>
             <CardFooter align="right">
               <Button size="large" color="primary">
-                Click
+                Add
               </Button>
             </CardFooter>
           </form>
