@@ -75,7 +75,10 @@ class BrowseCertificates extends Component {
     } = this.props;
 
     if (searchInput) {
-      if (Number(searchInput) <= certificatesLength) {
+      if (
+        Number(searchInput) <= certificatesLength &&
+        Number(searchInput) > 0
+      ) {
         try {
           this.setState({ loading: true });
           const data = await drizzle.contracts.Certifications.methods
