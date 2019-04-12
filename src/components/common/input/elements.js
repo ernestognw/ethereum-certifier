@@ -62,6 +62,12 @@ const PseudoInput = styled.input`
   height: 100%;
   transition: all .2s cubic-bezier(.68,-.55,.265,1.55);
 
+  ${props =>
+    props.leftIcon &&
+    `
+    padding-left: 2.5rem;
+    `}
+
   &:focus {
     outline: none;
     border: 1px solid ${props => props.theme.color.secondary};
@@ -90,4 +96,19 @@ const PseudoInput = styled.input`
   `}
 `;
 
-export { Container, PseudoInput, Label, Message };
+const LeftIconContainer = styled.div`
+  position: absolute;
+  display: block;
+  left: 0;
+  padding: 0.625rem 0.75rem;
+  color: ${props => props.theme.grey.lightDark};
+  font-size: 20px;
+
+  ${props =>
+    props.message &&
+    `
+    margin-top: 0px;
+  `}
+`;
+
+export { Container, PseudoInput, Label, Message, LeftIconContainer };
