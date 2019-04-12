@@ -15,6 +15,7 @@
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
+    "concurrently": "^4.1.0",
     "core-js": "3",
     "drizzle": "^1.4.0",
     "drizzle-react": "^1.2.0",
