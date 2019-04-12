@@ -1,12 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import Layout from 'components/layout/index';
 import AddCertificate from './views/add-certificate';
+import SearchCertificate from './views/search-certificate';
 import { drizzleConnect } from 'drizzle-react';
 import Loader from 'components/common/loader/index';
 
 class App extends Component {
 	state = {
-		slide: 1,
+		slide: 2,
 		title: 'Create a certificate',
 		subtitle: 'Here you can fill the form to create new certifications'
 	};
@@ -35,6 +36,7 @@ class App extends Component {
 		return (
 			<Layout title={title} subtitle={subtitle} slide={slide} changeSlide={this.changeSlide}>
 				{slide === 1 && <Fragment>{!initialized ? <Loader /> : <AddCertificate />}</Fragment>}
+				{slide === 2 && <SearchCertificate />}
 			</Layout>
 		);
 	}
