@@ -4,13 +4,17 @@ import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import App from "App";
 import drizzleOptions from "./drizzle-options";
-import { DrizzleProvider } from "drizzle-react";
+import { DrizzleContext } from "drizzle-react";
+import { Drizzle, generateStore } from "drizzle";
+
+const drizzleStore = generateStore(drizzleOptions);
+const drizzle = new Drizzle(drizzleOptions, drizzleStore);
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <DrizzleProvider options={drizzleOptions}>
+    <DrizzleContext.Provider drizzle={drizzle}>
       <App />
-    </DrizzleProvider>
+    </DrizzleContext.Provider>
   </ThemeProvider>,
   document.getElementById("root")
 );

@@ -1,18 +1,28 @@
 import React, { Component } from "react";
 import Layout from "components/layout/index";
 import AddCertificate from "./views/add-certificate";
-import { drizzleConnect } from "drizzle-react";
+import { DrizzleContext } from "drizzle-react";
 import Loader from "components/common/loader/index";
 
 class App extends Component {
   render() {
-    const { initialized } = this.props;
-    return <Layout>{!initialized ? <Loader /> : <AddCertificate />}</Layout>;
+    return (
+      <DrizzleContext.Consumer>
+        {drizzleContext => {
+          const { initialized } = drizzleContext;
+          if (!initialized) {
+            return <Loader />;
+          }
+
+          return (
+            <Layout>
+              <AddCertificate />;
+            </Layout>
+          );
+        }}
+      </DrizzleContext.Consumer>
+    );
   }
 }
 
-const mapStateToProps = state => ({
-  initialized: state.drizzleStatus.initialized
-});
-
-export default drizzleConnect(App, mapStateToProps);
+export default App;
