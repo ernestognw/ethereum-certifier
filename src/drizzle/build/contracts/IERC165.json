@@ -27,7 +27,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.2;\n\n/**\n * @title IERC165\n * @dev https://eips.ethereum.org/EIPS/eip-165\n */\ninterface IERC165 {\n    /**\n     * @notice Query if a contract implements an interface\n     * @param interfaceId The interface identifier, as specified in ERC-165\n     * @dev Interface identification is specified in ERC-165. This function\n     * uses less than 30,000 gas.\n     */\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\n}\n",
-  "sourcePath": "openzeppelin-solidity\\contracts\\introspection\\IERC165.sol",
+  "sourcePath": "openzeppelin-solidity/contracts/introspection/IERC165.sol",
   "ast": {
     "absolutePath": "openzeppelin-solidity/contracts/introspection/IERC165.sol",
     "exportedSymbols": {
@@ -278,7 +278,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-12T19:30:03.627Z",
+  "updatedAt": "2019-04-12T21:44:58.106Z",
   "devdoc": {
     "details": "https://eips.ethereum.org/EIPS/eip-165",
     "methods": {

@@ -279,7 +279,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.2;\n\nimport \"../../introspection/IERC165.sol\";\n\n/**\n * @title ERC721 Non-Fungible Token Standard basic interface\n * @dev see https://eips.ethereum.org/EIPS/eip-721\n */\ncontract IERC721 is IERC165 {\n    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);\n    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);\n    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);\n\n    function balanceOf(address owner) public view returns (uint256 balance);\n    function ownerOf(uint256 tokenId) public view returns (address owner);\n\n    function approve(address to, uint256 tokenId) public;\n    function getApproved(uint256 tokenId) public view returns (address operator);\n\n    function setApprovalForAll(address operator, bool _approved) public;\n    function isApprovedForAll(address owner, address operator) public view returns (bool);\n\n    function transferFrom(address from, address to, uint256 tokenId) public;\n    function safeTransferFrom(address from, address to, uint256 tokenId) public;\n\n    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public;\n}\n",
-  "sourcePath": "openzeppelin-solidity\\contracts\\token\\ERC721\\IERC721.sol",
+  "sourcePath": "openzeppelin-solidity/contracts/token/ERC721/IERC721.sol",
   "ast": {
     "absolutePath": "openzeppelin-solidity/contracts/token/ERC721/IERC721.sol",
     "exportedSymbols": {
@@ -2756,7 +2756,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-12T19:30:03.651Z",
+  "updatedAt": "2019-04-12T21:44:58.115Z",
   "devdoc": {
     "details": "see https://eips.ethereum.org/EIPS/eip-721",
     "methods": {
