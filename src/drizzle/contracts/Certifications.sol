@@ -8,7 +8,9 @@ contract Certifications is ERC721 {
     string fullName;
     string imageUrl;
     string course;
+    address certificateOwner;
   }
+
   address owner;
   Certificate[] public certificates;
   
@@ -18,14 +20,18 @@ contract Certifications is ERC721 {
   }
   
   // Methods
-  
   // Create Certificate
   function createCertificate(string memory _name, string memory _imageUrl, string memory _course, address _to) public returns (bool){
     uint certificateId = certificates.length;
-    certificates.push(Certificate(_name, _imageUrl, _course));
+    certificates.push(Certificate(_name, _imageUrl, _course, _to));
     
     _mint(_to, certificateId);
     
     return true;
+  }
+
+  // Get certificates quantity
+  function getCertificatesLength() public returns(uint256){
+    return certificates.length;
   }
 }

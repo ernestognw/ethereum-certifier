@@ -1,15 +1,21 @@
 import React, { Component, Fragment } from "react";
+import { ToastContainer, Slide } from "react-toastify";
 import Layout from "components/layout/index";
 import AddCertificate from "./views/add-certificate";
+import SearchCertificate from "./views/search-certificate";
 import Loader from "components/common/loader/index";
 import withDrizzle from "components/providers/withDrizzle";
+import "react-toastify/dist/ReactToastify.min.css";
 
 class App extends Component {
-  state = {
-    slide: 1,
-    title: "Create a certificate",
-    subtitle: "Here you can fill the form to create new certifications"
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      slide: 2,
+      title: "Create a certificate",
+      subtitle: "Here you can fill the form to create new certifications"
+    };
+  }
 
   changeSlide = slide => {
     this.setState({ slide });
@@ -41,9 +47,25 @@ class App extends Component {
         slide={slide}
         changeSlide={this.changeSlide}
       >
-        {slide === 1 && (
-          <Fragment>{!initialized ? <Loader /> : <AddCertificate />}</Fragment>
+        {!initialized ? (
+          <Loader />
+        ) : (
+          <Fragment>
+            {slide === 1 && <AddCertificate />}
+            {slide === 2 && <SearchCertificate />}
+          </Fragment>
         )}
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar
+          newestOnTop={false}
+          rtl={false}
+          pauseOnVisibilityChange={false}
+          draggable
+          pauseOnHover={false}
+          transition={Slide}
+        />
       </Layout>
     );
   }
