@@ -21,7 +21,7 @@ const Option = styled.div`
   font-size: ${props => props.theme.heading6};
   font-family: ${props => props.theme.font.medium};
   color: ${props => props.theme.color.default};
-  border-bottom: 3.5px solid
+  border-bottom: 2px solid
     ${props => (props.active ? props.theme.color.secondary : "transparent")};
 
   &:hover {

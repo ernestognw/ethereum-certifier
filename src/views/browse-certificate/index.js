@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { toast } from "react-toastify";
-import { Card } from "components/common/card";
+import { Card, CardBody as Body, CardHeader } from "components/common/card";
 import Typography from "components/common/typography";
 import Input from "components/common/input";
 import withDrizzle from "components/providers/withDrizzle";
@@ -13,14 +13,18 @@ class BrowseCertificates extends Component {
     this.state = {
       searchInput: "",
       results: [],
-      certificatesLength: ""
+      certificatesLength: "",
+      tab: 1
     };
   }
 
   handleInput = event => {
     const { target } = event;
     const { certificatesLength } = this.state;
-    if (target.value < certificatesLength && target.value >= 0) {
+    if (target.value === 0) {
+      target.value = 1;
+    }
+    if (target.value <= certificatesLength && target.value >= 1) {
       this.setState({
         searchInput: target.value
       });
@@ -33,14 +37,26 @@ class BrowseCertificates extends Component {
     } = this.props;
 
     try {
-      const data = await drizzle.contracts.Certifications.methods
+      const length = await drizzle.contracts.Certifications.methods
         .getCertificatesLength()
         .call();
 
+      const getCertifications = [];
+
+      for (let i = 0; i < length; i++) {
+        getCertifications.push(
+          drizzle.contracts.Certifications.methods.certificates(i).call()
+        );
+      }
+
+      const results = await Promise.all(getCertifications);
+
       this.setState({
-        certificatesLength: data
+        certificatesLength: length,
+        results
       });
     } catch (err) {
+      console.log(err);
       toast.error("An error has occurred");
     }
   };
@@ -54,7 +70,7 @@ class BrowseCertificates extends Component {
 
     try {
       const data = await drizzle.contracts.Certifications.methods
-        .certificates(searchInput)
+        .certificates(searchInput - 1)
         .call();
 
       this.setState({
@@ -66,7 +82,7 @@ class BrowseCertificates extends Component {
   };
 
   render() {
-    const { searchInput, results, certificatesLength } = this.state;
+    const { searchInput, results, certificatesLength, tab } = this.state;
     return (
       <Fragment>
         <Card>
@@ -84,17 +100,24 @@ class BrowseCertificates extends Component {
             </CardBody>
           </form>
           <OptionsContainer>
-            <Option>All</Option>
+            <Option active={tab === 1}>All</Option>
           </OptionsContainer>
         </Card>
         {results.length > 0 &&
           results.map((certificate, id) => (
-            <Fragment key={id}>
-              <Typography>{certificate.fullName}</Typography>
-              <Typography>{certificate.imageUrl}</Typography>
-              <Typography>{certificate.course}</Typography>
-              <Typography>{certificate.certificateOwner}</Typography>
-            </Fragment>
+            <Card marginT="50" key={id}>
+              <CardHeader title={certificate.fullName} />
+              <Body>
+                <Typography variant="heading">Photo</Typography>
+                <Typography marginB="20">{certificate.imageUrl}</Typography>
+                <Typography variant="heading">Course</Typography>
+                <Typography marginB="20">{certificate.course}</Typography>
+                <Typography variant="heading">Address</Typography>
+                <Typography marginB="20">
+                  {certificate.certificateOwner}
+                </Typography>
+              </Body>
+            </Card>
           ))}
       </Fragment>
     );
