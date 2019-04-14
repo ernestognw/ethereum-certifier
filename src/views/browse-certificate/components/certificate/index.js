@@ -13,6 +13,8 @@ const Certificate = ({ certificate }) => (
 				<Typography marginB="20">#{certificate.certificateId}</Typography>
 				<Typography variant="heading">Course</Typography>
 				<Typography marginB="20">{certificate.course}</Typography>
+				<Typography variant="heading">Generation</Typography>
+				<Typography marginB="20">{certificate.generation}</Typography>
 				<Typography variant="heading">Address</Typography>
 				<Typography marginB="20">{certificate.certificateOwner}</Typography>
 			</Body>

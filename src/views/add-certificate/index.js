@@ -7,6 +7,7 @@ import RoundAccountCircle from 'react-md-icon/dist/RoundAccountCircle';
 import RoundInsertPhoto from 'react-md-icon/dist/RoundInsertPhoto';
 import RoundNotes from 'react-md-icon/dist/RoundNotes';
 import RoundLink from 'react-md-icon/dist/RoundLink';
+import BaselineTimeline from 'react-md-icon/dist/BaselineTimeline';
 import { toast } from 'react-toastify';
 
 class AddCertificate extends Component {
@@ -14,6 +15,7 @@ class AddCertificate extends Component {
 		super(props);
 		this.state = {
 			name: '',
+			generation: '',
 			imageUrl: '',
 			course: '',
 			addressTo: ''
@@ -25,10 +27,11 @@ class AddCertificate extends Component {
 		const { context: { drizzle } } = this.props;
 
 		try {
-			const { name, imageUrl, course, addressTo } = this.state;
+			const { name, generation, imageUrl, course, addressTo } = this.state;
 
 			const result = await drizzle.contracts.Certifications.methods.createCertificate.cacheSend(
 				name,
+				Number(generation),
 				imageUrl,
 				course,
 				addressTo,
@@ -37,12 +40,11 @@ class AddCertificate extends Component {
 
 			this.setState({
 				name: '',
+				generation: '',
 				imageUrl: '',
 				course: '',
 				addressTo: ''
-      });
-      
-      console.log(result)
+			});
 
 			toast.success('Certified registered correctly');
 		} catch (err) {
@@ -58,7 +60,7 @@ class AddCertificate extends Component {
 	};
 
 	render() {
-		const { name, imageUrl, course, addressTo } = this.state;
+		const { name, generation, imageUrl, course, addressTo } = this.state;
 		return (
 			<Card>
 				<form onSubmit={this.createCertificate}>
@@ -71,6 +73,15 @@ class AddCertificate extends Component {
 							name="name"
 							type="text"
 							placeholder="Full name"
+							required
+						/>
+						<Input
+							leftIcon={<BaselineTimeline />}
+							onChange={this.handleInput}
+							value={generation}
+							name="generation"
+							type="number"
+							placeholder="Generation"
 							required
 						/>
 						<Input

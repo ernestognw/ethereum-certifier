@@ -46,9 +46,10 @@ class BrowseCertificates extends Component {
 
 			for (let i = 0; i < length; i++) {
 				getCertifications.push(drizzle.contracts.Certifications.methods.certificates(i).call());
-      }
-      
+			}
 
+			const a = drizzle.contracts.Certifications.methods.certificates().call();
+			console.log(a);
 			const results = await Promise.all(getCertifications);
 
 			this.setState({
@@ -57,7 +58,6 @@ class BrowseCertificates extends Component {
 				loading: false
 			});
 		} catch (err) {
-			console.log(err);
 			toast.error('An error has occurred');
 		}
 	};

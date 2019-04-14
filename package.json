@@ -1,45 +1,42 @@
 {
-  "name": "ethereum-certifier",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "start": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
-    "start:client": "react-scripts start",
-    "start:server": "DEBUG=ethereum-certifier* nodemon server/index.js --exec babel-node",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "seed": "NODE_PATH=src/ babel-node src/drizzle/seed.js",
-    "contract:compile": "cd src/drizzle && truffle compile",
-		"contract:migrate": "cd src/drizzle && truffle migrate --reset"
-  },
-  "dependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/node": "^7.2.2",
-    "@babel/preset-env": "^7.4.3",
-    "concurrently": "^4.1.0",
-    "core-js": "3",
-    "drizzle": "^1.4.0",
-    "drizzle-react": "^1.2.0",
-    "drizzle-react-components": "^1.4.0",
-    "nodemon": "^1.18.11",
-    "openzeppelin-solidity": "^2.2.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.8.6",
-    "react-md-icon": "^1.13.0",
-    "react-scripts": "2.1.8",
-    "react-toastify": "^5.0.1",
-    "styled-components": "^4.2.0",
+	"name": "ethereum-certifier",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"start": "concurrently -r \"yarn start:server\" \"yarn start:client\"",
+		"start:client": "react-scripts start",
+		"start:server": "set DEBUG=ethereum-certifier* nodemon server/index.js --exec babel-node",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject",
+		"seed": "set NODE_PATH=src/ babel-node src/drizzle/seed.js",
+		"contract:build": "cd src/drizzle && truffle build",
+		"contract:compile": "cd src/drizzle && truffle compile",
+		"contract:migrate": "cd src/drizzle && truffle migrate --reset",
+		"contract:network": "cd src/drizzle && truffle migrate --reset --network rinkeby"
+	},
+	"dependencies": {
+		"@babel/core": "^7.4.3",
+		"@babel/node": "^7.2.2",
+		"@babel/preset-env": "^7.4.3",
+		"concurrently": "^4.1.0",
+		"core-js": "3",
+		"drizzle": "^1.4.0",
+		"drizzle-react": "^1.2.0",
+		"drizzle-react-components": "^1.4.0",
+		"nodemon": "^1.18.11",
+		"openzeppelin-solidity": "^2.2.0",
+		"react": "^16.6.3",
+		"react-dom": "^16.8.6",
+		"react-md-icon": "^1.13.0",
+		"react-scripts": "2.1.8",
+		"react-toastify": "^5.0.1",
+		"styled-components": "^4.2.0",
 		"truffle-hdwallet-provider": "^1.0.6",
-    "web3": "^1.0.0-beta.52"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+		"web3": "^1.0.0-beta.52"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
 }
