@@ -48,8 +48,6 @@ class BrowseCertificates extends Component {
 				getCertifications.push(drizzle.contracts.Certifications.methods.certificates(i).call());
 			}
 
-			const a = drizzle.contracts.Certifications.methods.certificates().call();
-			console.log(a);
 			const results = await Promise.all(getCertifications);
 
 			this.setState({
