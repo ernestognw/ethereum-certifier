@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, PseudoInput, Label, Message, LeftIconContainer } from './elements';
+import { Container, PseudoInput, PseudoSelect, Label, Message, LeftIconContainer } from './elements';
 
 class Input extends Component {
 	state = {
@@ -27,19 +27,37 @@ class Input extends Component {
 						{props.leftIcon}
 					</LeftIconContainer>
 				)}
-				<PseudoInput
-					id={props.id}
-					type={props.type}
-					required={props.required}
-					value={props.value}
-					onChange={props.onChange}
-					success={props.success}
-					warning={props.warning}
-					error={props.error}
-					name={props.name}
-					leftIcon={props.leftIcon}
-					placeholder={props.placeholder}
-				/>
+
+				{props.select ? (
+					<PseudoSelect
+						id={props.id}
+						required={props.required}
+						value={props.value}
+						onChange={props.onChange}
+						success={props.success}
+						warning={props.warning}
+						error={props.error}
+						name={props.name}
+						leftIcon={props.leftIcon}
+						placeholderColor={props.placeholderColor}
+					>
+						{props.children}
+					</PseudoSelect>
+				) : (
+					<PseudoInput
+						id={props.id}
+						type={props.type}
+						required={props.required}
+						value={props.value}
+						onChange={props.onChange}
+						success={props.success}
+						warning={props.warning}
+						error={props.error}
+						name={props.name}
+						leftIcon={props.leftIcon}
+						placeholder={props.placeholder}
+					/>
+				)}
 				{props.message && (
 					<Message success={props.success} warning={props.warning} error={props.error}>
 						{props.message}

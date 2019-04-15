@@ -10,6 +10,18 @@ import RoundLink from 'react-md-icon/dist/RoundLink';
 import BaselineTimeline from 'react-md-icon/dist/BaselineTimeline';
 import { toast } from 'react-toastify';
 
+const courses = [
+	'Blockchain 101',
+	'Blockchain For Business',
+	'Hyperledger For Business',
+	'Blockchain For Lawyers',
+	'Ethereum Básico',
+	'Ethereum Intermedio',
+	'Hyperledger Básico',
+	'Hyperledger Intermedio',
+	'RSK'
+];
+
 class AddCertificate extends Component {
 	constructor(props) {
 		super(props);
@@ -46,7 +58,7 @@ class AddCertificate extends Component {
 				addressTo: ''
 			});
 
-			toast.success('Certified registered correctly');
+			toast.info('Transaction pending');
 		} catch (err) {
 			toast.error('An error has occurred');
 		}
@@ -81,6 +93,8 @@ class AddCertificate extends Component {
 							value={generation}
 							name="generation"
 							type="number"
+							min="1"
+							max="5"
 							placeholder="Generation"
 							required
 						/>
@@ -101,7 +115,16 @@ class AddCertificate extends Component {
 							type="text"
 							placeholder="Course"
 							required
-						/>
+							select={true}
+							placeholderColor={course.length === 0}
+						>
+							<option value="">Select a course</option>
+							{courses.map((course, index) => (
+								<option value={course} key={index}>
+									{course}
+								</option>
+							))}
+						</Input>
 						<Input
 							leftIcon={<RoundLink />}
 							onChange={this.handleInput}

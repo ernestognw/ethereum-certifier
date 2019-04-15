@@ -24,7 +24,7 @@ contract Certifications is ERC721 {
   // Methods
   // Create Certificate
   function createCertificate(string memory _name, uint _generation, string memory _imageUrl, string memory _course, address _to) public returns (bool){
-    uint certificateId = certificates.length;
+    uint certificateId = certificates.length + 1;
     certificates.push(Certificate(certificateId, _name, _generation, _imageUrl, _course, _to));
     
     _mint(_to, certificateId);

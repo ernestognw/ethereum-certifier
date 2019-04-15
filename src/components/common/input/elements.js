@@ -69,6 +69,48 @@ const PseudoInput = styled.input`
 			props.success &&
 			`
         border: 1px solid ${props.theme.color.success} !important;
+      `};
+		${props =>
+			props.warning &&
+			`
+        border: 1px solid ${props.theme.color.warning} !important;
+      `};
+		${props =>
+			props.error &&
+			`
+        border: 1px solid ${props.theme.color.danger} !important;
+      `};
+	}
+
+	${props => props.theme.media.phone`
+    width: auto;
+  `};
+`;
+
+const PseudoSelect = styled.select`
+	background-color: #fff;
+	font-family: 'AmericaLight';
+	font-size: 0.875rem;
+	border-radius: 5px;
+	width: 100% !important;
+	border: 1px solid ${props => props.theme.grey.lightGrey};
+	padding: 0.625rem 0.75rem;
+	height: 100%;
+	transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+	${props =>
+		props.leftIcon &&
+		`
+    padding-left: 2.5rem;
+    `};
+
+	&:focus {
+		outline: none;
+		border: 1px solid ${props => props.theme.color.secondary};
+		${props =>
+			props.success &&
+			`
+        border: 1px solid ${props.theme.color.success} !important;
       `} ${props =>
 				props.warning &&
 				`
@@ -79,6 +121,12 @@ const PseudoInput = styled.input`
         border: 1px solid ${props.theme.color.danger} !important;
       `};
 	}
+
+	${props =>
+		props.placeholderColor &&
+		`
+		color: ${props.theme.grey.lightDark};
+	`};
 
 	${props => props.theme.media.phone`
     width: auto;
@@ -108,4 +156,4 @@ const LeftIconContainer = styled.div`
 `};
 `;
 
-export { Container, PseudoInput, Label, Message, LeftIconContainer };
+export { Container, PseudoInput, Label, Message, LeftIconContainer, PseudoSelect };

@@ -1,12 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { toast } from 'react-toastify';
-import { Card } from 'components/common/card';
 import Loader from 'components/common/loader/index';
-import Input from 'components/common/input';
 import withDrizzle from 'components/providers/withDrizzle';
-import RoundSearch from 'react-md-icon/dist/RoundSearch';
-import { CardBody, Button, OptionsContainer, Option } from './elements';
 import Certificate from './components/certificate/index';
+import SearchForm from './components/search-form';
 
 class BrowseCertificates extends Component {
 	constructor(props) {
@@ -21,27 +18,11 @@ class BrowseCertificates extends Component {
 		};
 	}
 
-	handleInput = event => {
-		const { target } = event;
-		const { value } = target;
-		if (value.match(/[0-9]/g) && !value.includes(' ')) {
-			this.setState({
-				searchInput: value
-			});
-		} else if (!value) {
-			this.setState({
-				searchInput: '',
-				searchResults: []
-			});
-		}
-	};
-
 	componentDidMount = async () => {
 		const { context: { drizzle } } = this.props;
 
 		try {
 			const length = await drizzle.contracts.Certifications.methods.getCertificatesLength().call();
-
 			const getCertifications = [];
 
 			for (let i = 0; i < length; i++) {
@@ -60,12 +41,42 @@ class BrowseCertificates extends Component {
 		}
 	};
 
+	componentDidUpdate = (_, prevState) => {
+		const { tab } = this.state;
+		if (prevState.tab !== tab) {
+			this.setState({
+				searchInput: '',
+				searchResults: []
+			});
+		}
+	};
+
+	handleInput = event => {
+		const { target } = event;
+		let { value, id } = target;
+
+		if (id === 'course') {
+			this.setState({ searchInput: value });
+		} else {
+			if (value.match(/[0-9]/g) && !value.includes(' ')) {
+				this.setState({
+					searchInput: value
+				});
+			} else if (!value) {
+				this.setState({
+					searchInput: '',
+					searchResults: []
+				});
+			}
+		}
+	};
+
 	searchCertificate = async event => {
 		event.preventDefault();
-		const { searchInput, certificatesLength } = this.state;
+		const { searchInput, certificatesLength, results, tab } = this.state;
 		const { context: { drizzle } } = this.props;
 
-		if (searchInput) {
+		if (searchInput && tab === 2) {
 			if (Number(searchInput) <= certificatesLength && Number(searchInput) > 0) {
 				try {
 					this.setState({ loading: true });
@@ -81,38 +92,39 @@ class BrowseCertificates extends Component {
 			} else {
 				toast.warning('That certificate ID does not exist');
 			}
+		} else if (searchInput && tab === 3) {
+			const searchResults = results.filter(result => result.course === searchInput);
+			if (searchResults.length > 0) {
+				this.setState({ searchResults });
+			} else {
+				toast.error('We did not find any match');
+			}
 		}
 	};
 
+	changeTab = tab => this.setState({ tab });
+
 	render() {
-		const { searchInput, results, certificatesLength, tab, searchResults, loading } = this.state;
+		const { searchInput, results, tab, searchResults, loading } = this.state;
 		return (
 			<Fragment>
-				<Card>
-					<form onSubmit={this.searchCertificate}>
-						<CardBody>
-							<Input
-								leftIcon={<RoundSearch />}
-								onChange={this.handleInput}
-								value={searchInput}
-								type="text"
-								marginT="0"
-								placeholder={`Search certificates by ID (${certificatesLength})`}
-							/>
-							<Button size="large">Search</Button>
-						</CardBody>
-					</form>
-					<OptionsContainer>
-						<Option active={tab === 1}>All</Option>
-					</OptionsContainer>
-				</Card>
+				<SearchForm
+					searchCertificate={this.searchCertificate}
+					handleInput={this.handleInput}
+					changeTab={this.changeTab}
+					resultsLength={results.length}
+					searchResultsLength={searchResults.length}
+					searchInput={searchInput}
+					tab={tab}
+				/>
 				{loading ? (
 					<Loader />
 				) : (
 					<Fragment>
-						{searchResults.length > 0
-							? searchResults.map((certificate, id) => <Certificate certificate={certificate} key={id} />)
-							: results.map((certificate, id) => <Certificate certificate={certificate} key={id} />)}
+						{tab === 1 &&
+							results.map((certificate, id) => <Certificate certificate={certificate} key={id} />)}
+						{searchResults.length > 0 &&
+							searchResults.map((certificate, id) => <Certificate certificate={certificate} key={id} />)}
 					</Fragment>
 				)}
 			</Fragment>

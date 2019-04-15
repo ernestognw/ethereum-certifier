@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { ToastContainer, Slide } from 'react-toastify';
+import { ToastContainer, Slide, toast } from 'react-toastify';
 import Layout from 'components/layout/index';
 import AddCertificate from './views/add-certificate';
 import BrowseCertificate from './views/browse-certificate';
@@ -13,9 +13,42 @@ class App extends Component {
 		this.state = {
 			slide: 1,
 			title: 'Create a certificate',
-			subtitle: 'Here you can fill the form to create new certifications'
+			subtitle: 'Here you can fill the form to create new certifications',
+			transactionHash: '',
+			transactions: [],
+			transactionsConfirmed: []
 		};
 	}
+
+	componentDidUpdate = (prevProps, prevState) => {
+		const { context: { drizzleState } } = this.props;
+		const { transactions, transactionsConfirmed } = this.state;
+
+		if (
+			prevProps.context.drizzleState &&
+			drizzleState.transactions !== prevProps.context.drizzleState.transactions
+		) {
+			const transactions = Object.keys(drizzleState.transactions).map(key => {
+				return {
+					...drizzleState.transactions[key],
+					key
+				};
+			});
+			this.setState({ transactions });
+		}
+
+		if (prevState.transactions !== transactions) {
+			transactions.forEach(transaction => {
+				const finded = transactionsConfirmed.find(transac => transac.key === transaction.key);
+				if (!finded && transaction.status === 'success') {
+					toast.success(`Transaction ${transaction.key} success`);
+					this.setState({ transactionsConfirmed: [...transactionsConfirmed, transaction] });
+				} else if (transaction.status === 'error') {
+					toast.error(`Transaction ${transaction.key} went wrong`);
+				}
+			});
+		}
+	};
 
 	changeSlide = slide => {
 		this.setState({ slide });
